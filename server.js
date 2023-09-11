@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   // Get query parameters from the request
   const slackName = req.query.slack_name || 'example_name';
   const track = req.query.track || 'backend';
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
   // Construct GitHub URLs based on your repository and file names
   const githubRepoURL = 'https://github.com/OhiareYazid/MonsurahProject2';
-  const githubFileName = 'https://github.com/OhiareYazid/MonsurahProject2/index.js';
+  const githubFileName = 'server.js';
   const githubFileURL = `${githubRepoURL}/blob/master/${githubFileName}`;
 
   // Response JSON object
