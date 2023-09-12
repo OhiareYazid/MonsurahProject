@@ -17,9 +17,8 @@ app.get('/api', (req, res) => {
   const currentDay = daysOfWeek[currentDate.getUTCDay()];
 
   // Get the current UTC time with validation of +/-2 minutes
-  const utcTime = new Date();
-  utcTime.setMinutes(utcTime.getMinutes() - 2);
-  const utcTimeString = utcTime.toISOString();
+  
+  const utcTimeString = new Date().toISOString().slice(0, -1) + 'Z';
 
   // Construct GitHub URLs based on your repository and file names
   const githubRepoURL = 'https://github.com/OhiareYazid/MonsurahProject';
