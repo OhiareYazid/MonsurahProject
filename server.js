@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 3000;
+const moment = require('moment'); 
 
 app.use(cors());
 app.use(express.json());
@@ -11,14 +12,13 @@ app.get('/api', (req, res) => {
   const slackName = req.query.slack_name || 'example_name';
   const track = req.query.track || 'backend';
 
-  // Get the current day of the week
-  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const currentDate = new Date();
-  const currentDay = daysOfWeek[currentDate.getUTCDay()];
-
-  // Get the current UTC time with validation of +/-2 minutes
   
-  const utcTimeString = new Date().toISOString().slice(0, -1) + 'Z';
+  let current_day = moment().day();
+   const weekDays = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  
+   current_day = weekDays[current_day] ;
+  
+   const utc_time = moment.utc().format() ; 
 
   // Construct GitHub URLs based on your repository and file names
   const githubRepoURL = 'https://github.com/OhiareYazid/MonsurahProject';
@@ -28,8 +28,8 @@ app.get('/api', (req, res) => {
   // Response JSON object
   const response = {
     slack_name: slackName,
-    current_day: currentDay,
-    utc_time: utcTimeString,
+    current_day: current_day,
+    utc_time: utc_time,
     track: track,
     github_file_url: githubFileURL,
     github_repo_url: githubRepoURL,
